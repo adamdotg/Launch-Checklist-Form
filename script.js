@@ -7,7 +7,7 @@ window.addEventListener("load", function(){
       let coPilot = document.querySelector("input[name=copilotName]");
       let fuelLevel = document.querySelector("input[name=fuelLevel]");
       let cargoMass = document.querySelector("input[name=cargoMass]");
-
+      let statusCheck = document.getElementById("launchStatusCheck");
       let faultyItems = document.querySelector("#faultyItems");
       let pilotStatus = document.getElementById("pilotStatus");
        
@@ -44,13 +44,25 @@ window.addEventListener("load", function(){
          return false;
          //event.preventDefault();
       }
-      console.log("fuel", fuelLevel.value);
+      function update(){
+         if (fuelLevel.value < 10000 || cargoMass.value > 10000){
+            faultyItems.style.visibility = "visible";
+            statusCheck.innerHTML = `
+            <h2 id="launchStatus">Shuttle not ready for launch</h2>
+            <div  id="faultyItems" style="visibility: visible;">
+                <ol>
+                    <li id="pilotStatus">${pilot.value}</li>
+                    <li id="copilotStatus">${coPilot.value}</li>
+                    <li id="fuelStatus">Fuel level high enough for launch</li>
+                    <li id="cargoStatus">Cargo mass low enough for launch</li>
+                </ol>
+            </div>
+            `
 
-      if (fuelLevel.value < 10000){
-         faultyItems.style.visibility = "visible";
-         console.log("make visible", faultyItems.style);
-         event.preventDefault();
+            event.preventDefault();
+         }
       }
+      update();
 
    });
    console.log("Loaded!");
