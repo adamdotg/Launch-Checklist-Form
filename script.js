@@ -1,5 +1,10 @@
 // Write your JavaScript code here!
 window.addEventListener("load", function(){
+   fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response){
+      response.json().then( function(json){
+         console.log(json);
+      })
+   });
    document.querySelector("input[name=pilotName]").focus();
    let form = document.getElementById("launchForm");
    form.addEventListener("submit", function(){
@@ -8,11 +13,7 @@ window.addEventListener("load", function(){
       let fuelLevel = document.querySelector("input[name=fuelLevel]");
       let cargoMass = document.querySelector("input[name=cargoMass]");
       const statusCheck = document.getElementById("launchStatusCheck");
-      let faultyItems = document.querySelector("#faultyItems");
-      let launchStatus = document.getElementById("launchStatus");
       const fuel = document.getElementById("fuelStatus");
-      //let pilotStatus = document.getElementById("pilotStatus");
-      let test = document.getElementById("test");
       event.preventDefault();
       
       if (pilot.value === "" || coPilot.value === "" || fuelLevel.value === "" || cargoMass.value === ""){
@@ -43,20 +44,7 @@ window.addEventListener("load", function(){
          document.querySelector("input[name=cargoMass]").focus;
          return false;
       }
-      // function visible(){
-      //       statusCheck.innerHTML = `
-      //       <h2 id="launchStatus">Awaiting Information Before Launch</h2>
-      //       <div id="faultyItems" style="visibility: visible;">
-      //           <ol>
-      //               <li id="pilotStatus">${pilot.value}</li>
-      //               <li id="copilotStatus">${coPilot.value}</li>
-      //               <li id="fuelStatus">Fuel level high enough for launch</li>
-      //               <li id="cargoStatus">Cargo mass low enough for launch</li>
-      //           </ol>
-      //       </div>
-      //       `;
-      // }
-      // visible();
+
       if (fuelLevel.value < 10000 && cargoMass.value > 10000){
          statusCheck.innerHTML =`
          <h2 id="launchStatus" style="color: red;">Shuttle not ready for launch</h2>
@@ -99,8 +87,10 @@ window.addEventListener("load", function(){
       else {
          statusCheck.innerHTML =`
          <h2 id="launchStatus" style="color: green;">Shuttle ready for launch</h2>
-         `
+         `;
       }
+
+      //function or if statement that checks for all fields to be true that displays mission destination html in mission target div
 
    });
 });
@@ -115,8 +105,3 @@ window.addEventListener("load", function(){
 </ol>
 <img src="${}">
 */
-
-//--old----------------------------
-//       document.querySelector("input[name=fuelLevel]").focus();
-//       console.log (pilot.value, typeof(pilot.value));
-//         document.querySelector("input[name=fuelLevel]").focus();
