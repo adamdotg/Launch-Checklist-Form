@@ -3,7 +3,8 @@ window.addEventListener("load", function(){
    fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response){
       response.json().then( function(json){
          const target = document.getElementById("missionTarget");
-         num = Math.floor(Math.random()*7);
+         num = Math.floor(Math.random()*6);
+         console.log(num);
          target.innerHTML = `
             <h2>Mission Destination</h2>
                <ol>
@@ -15,7 +16,6 @@ window.addEventListener("load", function(){
                </ol> 
             <img src="${json[num].image}">
          `;
-         console.log(num);
       })
    });
    document.querySelector("input[name=pilotName]").focus();
