@@ -3,7 +3,6 @@ window.addEventListener("load", function(){
    fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response){
       response.json().then( function(json){
          const target = document.getElementById("missionTarget");
-         let num = 0;
          num = Math.floor(Math.random()*7);
          target.innerHTML = `
             <h2>Mission Destination</h2>
@@ -27,7 +26,6 @@ window.addEventListener("load", function(){
       let fuelLevel = document.querySelector("input[name=fuelLevel]");
       let cargoMass = document.querySelector("input[name=cargoMass]");
       const statusCheck = document.getElementById("launchStatusCheck");
-      const fuel = document.getElementById("fuelStatus");
       event.preventDefault();
       
       if (pilot.value === "" || coPilot.value === "" || fuelLevel.value === "" || cargoMass.value === ""){
