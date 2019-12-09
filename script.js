@@ -2,7 +2,21 @@
 window.addEventListener("load", function(){
    fetch("https://handlers.education.launchcode.org/static/planets.json").then( function(response){
       response.json().then( function(json){
-         console.log(json);
+         const target = document.getElementById("missionTarget");
+         let num = 0;
+         num = Math.floor(Math.random()*7);
+         target.innerHTML = `
+            <h2>Mission Destination</h2>
+               <ol>
+                  <li>Name: ${json[num].name}</li>
+                  <li>Diameter: ${json[num].diameter}</li>
+                  <li>Star: ${json[num].star}</li>
+                  <li>Distance from Earth: ${json[num].distance}</li>
+                  <li>Number of Moons: ${json[num].moons}</li>
+               </ol> 
+            <img src="${json[num].image}">
+         `;
+         console.log(num);
       })
    });
    document.querySelector("input[name=pilotName]").focus();
@@ -18,9 +32,9 @@ window.addEventListener("load", function(){
       
       if (pilot.value === "" || coPilot.value === "" || fuelLevel.value === "" || cargoMass.value === ""){
          alert("All fields required");
-         }
-
-      if (!isNaN(pilot.value)){
+         return false;
+      }
+      else if (!isNaN(pilot.value)){
          console.log(!isNaN(pilot.value));
          alert(`Pilot name "${pilot.value}" is invalid.`);
          document.querySelector("input[name=pilotName]").focus();
@@ -45,6 +59,7 @@ window.addEventListener("load", function(){
          return false;
       }
 
+      
       if (fuelLevel.value < 10000 && cargoMass.value > 10000){
          statusCheck.innerHTML =`
          <h2 id="launchStatus" style="color: red;">Shuttle not ready for launch</h2>
@@ -89,9 +104,6 @@ window.addEventListener("load", function(){
          <h2 id="launchStatus" style="color: green;">Shuttle ready for launch</h2>
          `;
       }
-
-      //function or if statement that checks for all fields to be true that displays mission destination html in mission target div
-
    });
 });
 /* This block of code shows how to format the HTML once you fetch some planetary JSON!
